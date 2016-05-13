@@ -1,0 +1,20 @@
+{
+  "name": "botmailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm index.js"
+  },
+  "keywords": [
+    "gmail",
+    "api",
+    "bot",
+    "email",
+    "auto",
+    "reply",
+    "fun"
+  ],
+  "author": "anandpathak69@gmail.com",
+  "license": "MIT"
+}
