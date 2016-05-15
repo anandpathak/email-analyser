@@ -16,5 +16,9 @@
     "fun"
   ],
   "author": "anandpathak69@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "google-auth-library": "^0.9.8",
+    "googleapis": "^6.1.0"
+  }
 }
