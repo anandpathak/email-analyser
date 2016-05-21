@@ -13,12 +13,13 @@ var CONFIG= {
 	,
 	Rules :[
 		{
-			type : 'keyword' /*keyword, regex , send_from , */
+			type : 'keyword' /*keyword, regex , send_from */
 			,action : ''		/*reply , delete , add_lebel , mark_as_read,count*/
 			,value : ['']		/*message*/
 		}
 
 	]
+
 
 }
 module.exports = CONFIG;
