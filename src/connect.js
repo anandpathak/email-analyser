@@ -4,19 +4,17 @@ var googleAuth = require('google-auth-library');
 var CONFIG= require('./configuration.js');
 var promise= require('promise');
 
-var SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 var TOKEN_DIR = './.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs-quickstart.json';
+var SCOPES, TOKEN_PATH, KEYFILE;
 
 
-//var connect = function (){	
-//}
-	
-//var methods= connect.prototype;
-var connectGmail = function () {
+var connectOauth2 = function (KEYFILE,TOKEN_PATH,SCOPES) {
+  this.KEYFILE=KEYFILE;
+  this.TOKEN_PATH=TOKEN_PATH;
+  this.SCOPES=SCOPES;
 
 	return new promise(function(fulfill, reject){
-		fs.readFile('./.credentials/client_secret.json', function processClientSecrets(err, content) {
+		fs.readFile(KEYFILE, function processClientSecrets(err, content) {
   			if (err) {
     			console.log('Error loading client secret file: ' + err);
     			reject(err);
@@ -32,7 +30,7 @@ var connectGmail = function () {
   			var redirectUrl = credentials.installed.redirect_uris[0];
   			var auth = new googleAuth();
   			var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-  			fs.readFile(TOKEN_PATH, function(err, token) {
+  			fs.readFile(this.TOKEN_PATH, function(err, token) {
     			if (err) {
       				getNewToken(oauth2Client, function(data){
       					if(data == null)
@@ -53,7 +51,7 @@ var connectGmail = function () {
 function getNewToken(oauth2Client, callback) {
   var authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: SCOPES
+    scope: this.SCOPES
   });
   console.log('Authorize this app by visiting this url: ', authUrl);
   var rl = readline.createInterface({
@@ -81,8 +79,8 @@ function storeToken(token) {
       throw err;
     }
   }
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-  console.log('Token stored to ' + TOKEN_PATH);
+  fs.writeFile(this.TOKEN_PATH, JSON.stringify(token));
+  console.log('Token stored to ' + this.TOKEN_PATH);
 }
 
-module.exports=connectGmail;
+module.exports=connectOauth2;

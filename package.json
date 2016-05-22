@@ -20,7 +20,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "google-auth-library": "^0.9.8",
-    "googleapis": "^6.1.0",
+    "googleapis": "git+https://github.com/google/google-api-nodejs-client.git#0115f0f08a58c8b7cf963cf1cdfd05bcf31c27a4",
     "promise": "^7.1.1"
   }
 }

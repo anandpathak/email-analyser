@@ -1,8 +1,11 @@
 var google = require('googleapis');
 var connect = require('../connect.js');
 
+var KEYFILE=__dirname+'/../../.credentials/client_secret.json';
+var TOKEN_FILE=__dirname+'/../../.credentials/gmail_token.json'; 
+var SCOPE='https://www.googleapis.com/auth/gmail.readonly';
 
-connect().then(function(auth){
+connect(KEYFILE,TOKEN_FILE,SCOPE).then(function(auth){
 	console.log(auth);
 		var gmail = google.gmail('v1');
 		  gmail.users.labels.list({
@@ -49,6 +52,6 @@ connect().then(function(auth){
   });
 
 });*/
-connect().then(function(auth){
+/*connect().then(function(auth){
 	
-});
+});*/
