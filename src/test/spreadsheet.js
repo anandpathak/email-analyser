@@ -1,10 +1,7 @@
 var google = require('googleapis');
 var connect = require('../connect.js');
 
-var KEYFILE=__dirname+'/../../.credentials/client_secret.json';
-var TOKEN_FILE=__dirname+'/../../.credentials/spreadsheet_token.json'; 
-var SCOPE='https://www.googleapis.com/auth/spreadsheets.readonly';
-connect(KEYFILE,TOKEN_FILE,SCOPE)
+connect()
 	.then(function(auth){
 		var sheets = google.sheets('v4');
 		sheets.spreadsheets.values.get({

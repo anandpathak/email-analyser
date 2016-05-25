@@ -1,3 +1,4 @@
 .credential*
 data.json
 node_modules*
+src/configuration.js

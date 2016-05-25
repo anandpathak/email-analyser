@@ -1,11 +1,11 @@
 var CONFIG= {
-	search : {
+	Search : {
 		/*gmail search parameter 
 			e.g  'from : himesh@reshamiya.com'
 		*/
-		mail_search : ""
+		mail_search : 'from : himesh@reshamiya.com'
 		/*Maximum number of emails*/
-		,maxResults : 1000
+		,maxResults : 500
 		/* filter using label*/
 		,labelIds : 'unread'
 		,includeSpamTrash : false

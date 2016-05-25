@@ -1,10 +1,10 @@
 var google = require('googleapis');
 var connect = require('../connect.js');
+CONFIG = require('../configuration.js');
 
-var KEYFILE=__dirname+'/../../.credentials/client_secret.json';
-var TOKEN_FILE=__dirname+'/../../.credentials/gmail_token.json'; 
-var SCOPE='https://www.googleapis.com/auth/gmail.readonly';
 
+
+/*
 connect(KEYFILE,TOKEN_FILE,SCOPE).then(function(auth){
 	console.log(auth);
 		var gmail = google.gmail('v1');
@@ -31,27 +31,28 @@ connect(KEYFILE,TOKEN_FILE,SCOPE).then(function(auth){
 	.catch(function(err){
 		console.log(err.toString());
 	});
+*/
+connect()
+	.then(function(auth){
+		var gmail = google.gmail('v1');
+		var search=CONFIG.Search;
+	  	gmail.users.messages.list({
+	    	auth:auth,
+	    	userId : 'me',
+	   		includeSpamTrash : CONFIG.Search.includeSpamTrash,
+//		    labelIds: CONFIG.search.labelIds,
+//	    	maxResults : CONFIG.search.maxResults || 1,
+		    q : CONFIG.Search.mail_search
+	  		}, function (err, response){
+	      		if (err){
+	        		console.log('No Message Found');
+	      		}
+	      		else {
+	      			console.log(response);
+	      		}
+	  		});	
 
-/*connect().then(function(auth){
-	var gmail = google.gmail('v1');
-  	gmail.users.messages.list({
-    auth:auth,
-    userId : 'me',
-   // includeSpamTrash : CONFIG.search.includeSpamTrash,
-
-//    labelIds: CONFIG.search.labelIds,
-    //maxResults : CONFIG.search.maxResults || 1,
-//    q : CONFIG.search.mail_search
-  }, function (err, response){
-      if (err){
-        console.log('No Message Found');
-      }
-      else {
-      		console.log(response);
-      }
-  });
-
-});*/
-/*connect().then(function(auth){
-	
-});*/
+	})
+	.catch(function(Err){
+		console.log(Err.toString());
+	})

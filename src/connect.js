@@ -5,14 +5,12 @@ var CONFIG= require('./configuration.js');
 var promise= require('promise');
 
 var TOKEN_DIR = './.credentials/';
-var SCOPES, TOKEN_PATH, KEYFILE;
+var KEYFILE=__dirname+'/../.credentials/client_secret.json';
+var TOKEN_PATH=__dirname+'/../.credentials/google_token.json'; 
+var SCOPES=['https://www.googleapis.com/auth/gmail.readonly','https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 
-var connectOauth2 = function (KEYFILE,TOKEN_PATH,SCOPES) {
-  this.KEYFILE=KEYFILE;
-  this.TOKEN_PATH=TOKEN_PATH;
-  this.SCOPES=SCOPES;
-
+var connectOauth2 = function () {
 	return new promise(function(fulfill, reject){
 		fs.readFile(KEYFILE, function processClientSecrets(err, content) {
   			if (err) {
@@ -30,7 +28,7 @@ var connectOauth2 = function (KEYFILE,TOKEN_PATH,SCOPES) {
   			var redirectUrl = credentials.installed.redirect_uris[0];
   			var auth = new googleAuth();
   			var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-  			fs.readFile(this.TOKEN_PATH, function(err, token) {
+  			fs.readFile(TOKEN_PATH, function(err, token) {
     			if (err) {
       				getNewToken(oauth2Client, function(data){
       					if(data == null)
@@ -51,7 +49,7 @@ var connectOauth2 = function (KEYFILE,TOKEN_PATH,SCOPES) {
 function getNewToken(oauth2Client, callback) {
   var authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: this.SCOPES
+    scope: SCOPES
   });
   console.log('Authorize this app by visiting this url: ', authUrl);
   var rl = readline.createInterface({
@@ -79,8 +77,8 @@ function storeToken(token) {
       throw err;
     }
   }
-  fs.writeFile(this.TOKEN_PATH, JSON.stringify(token));
-  console.log('Token stored to ' + this.TOKEN_PATH);
+  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+  console.log('Token stored to ' + TOKEN_PATH);
 }
 
 module.exports=connectOauth2;
