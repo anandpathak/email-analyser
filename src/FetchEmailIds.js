@@ -45,7 +45,7 @@ var FetchMessageId= function(){
 									});
 //								console.log("\n\n : "+ NextToken);	
 								if(NextToken == null)
-									fulfill(messagesList);
+									fulfill({'auth':auth, 'messagesList':messagesList});
 								else
 									fetchMore(NextToken);
 							}
@@ -68,7 +68,7 @@ function FirstList(auth,callback){
 		q : CONFIG.Search.mail_search
 	},function(err,response){
 		if(err){
-			callback("messages not found", null);
+			callback("messages List not found "+err, null);
 		}
 		else
 			callback(null, response);
@@ -80,4 +80,4 @@ function FirstList(auth,callback){
 	console.log("here is error" + err);
 });
 */
-module.export= FetchMessageId;
+module.exports= FetchMessageId;
