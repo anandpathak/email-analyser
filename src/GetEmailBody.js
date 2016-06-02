@@ -40,11 +40,15 @@ var EmailMessages = function(){
 						}
 						
 						if(count == List.messagesList.length){
-							console.log("fulfill"+ emailData);
+							//console.log("fulfill"+ emailData);
 							fulfill(emailData);
 						}
 						else{
-							console.log(count);
+					//		console.log(count);
+					//		process.stdout.clearLine();
+							process.stdout.cursorTo(0);
+							process.stdout.write("Fetching... "+Math.floor(count*100/List.messagesList.length)+"%");
+							
 						}
 						count++;						
 					});
@@ -64,3 +68,4 @@ var EmailMessages = function(){
 .catch(function(err){
 	console.log("here is the problem "+err);
 });*/
+module.exports=EmailMessages;
