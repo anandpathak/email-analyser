@@ -9,8 +9,12 @@ var CONFIG= {
 		/* filter using label*/
 		,labelIds : 'unread'
 		,includeSpamTrash : false
-	}
-	,
+	},
+	Sheet :{
+		ID:'',
+		range:'A1',
+		sheetName : 'TestSpreadsheetAPI'
+	},
 	Rules :[
 		{
 			type : 'keyword' /*keyword, regex , send_from */
