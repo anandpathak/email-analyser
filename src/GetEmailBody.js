@@ -52,7 +52,7 @@ var EmailMessages = function(){
 						}
 						count++;						
 					});
-				},index*1000);
+				},index*100);
 			});
 		})
 		.catch(function(err){
