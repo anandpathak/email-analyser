@@ -1,10 +1,11 @@
 var messages= require('../GetEmailBody.js');
+var sendData= require('../speadsheetSaver.js');
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 
-//var parser=function(){
+var parser=function(callback){
 	messages().then(function(data){
-		var Obj={};
+		var Obj={},mainObj;
 		data.forEach(function(value,index,size){
 			var str=value.replace(/<(?:.|\n)*?>/g, '');
 			Obj.status=str.indexOf(' is back UP') == -1 ? 'down' : 'UP';
@@ -15,8 +16,7 @@ var emitter = new EventEmitter();
 					//console.log(xx);
 					Obj.stack=xx[0].replace(/.*.The monitor /,'');
 					Obj.returns=str.match(/\([^\(\)].*?\)/g)[1];
-//					emitter.emit('data',Obj);
-					console.log(Obj);
+					mainObj.push(obj);
 				}
 				catch(E){
 					console.log('replace did not worked error : ',E,' xx =' , xx);
@@ -25,10 +25,19 @@ var emitter = new EventEmitter();
 			else{
 				
 			}
+			if(index==data.length -1)
+				callback(mainObj);
 		});
 	}).catch(function(error){
 		console.log("error "+ error);
 	});
-//}
-
+}
+parser(function(data){
+	var xx={
+		values: [['fal', 'aam', 'sev' , 'tarbooz'],
+				 ['sabzi','govi', 'tamatar', 'aaloo']
+				]
+	}
+	sendData(xx);
+});
 //module.exports=parser;
