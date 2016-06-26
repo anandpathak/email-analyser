@@ -19,7 +19,6 @@ var FetchMessageId= function(){
 				}
 				else{
 					messagesList= data.messages;
-					//console.log(JSON.stringify(messagesList));
 					var NextToken=data.nextPageToken || null;
 					fetchMore(NextToken);
 					function fetchMore(NextToken){
@@ -30,7 +29,6 @@ var FetchMessageId= function(){
 							'q': CONFIG.Search.mail_search,
 							'pageToken':NextToken
 						}, function(err,response){
-//							console.log(NextToken);
 							if(err){
 								console.log(err);
 								NextToken=null;
@@ -38,12 +36,10 @@ var FetchMessageId= function(){
 							}
 							else{
 								NextToken=response.nextPageToken;
-								//messagesList.push(response.messages);
 								if(typeof response.messages != "undefined")
 									response.messages.forEach(function(value,index, array){
 										messagesList.push(value);
 									});
-//								console.log("\n\n : "+ NextToken);	
 								if(NextToken == null)
 									fulfill({'auth':auth, 'messagesList':messagesList});
 								else
@@ -74,10 +70,5 @@ function FirstList(auth,callback){
 			callback(null, response);
 	});
 }
-/*FetchMessageId().then(function(data){
-	console.log(data.length);
-}).catch(function(err){
-	console.log("here is error" + err);
-});
-*/
+
 module.exports= FetchMessageId;

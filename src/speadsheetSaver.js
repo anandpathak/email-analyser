@@ -2,7 +2,7 @@ var google = require('googleapis');
 var connect = require('./connect.js');
 CONFIG = require('./configuration.js');
 
-var spreadsheetWrite = function(data){
+var spreadsheetWrite = function(data,range){
 	
 	connect().then(function(auth){
 		var sheets= google.sheets('v4');
@@ -15,7 +15,7 @@ var spreadsheetWrite = function(data){
 					spreadsheetId : ID, 
 					resource : data, 
 					valueInputOption : 'USER_ENTERED', 
-					range  : 'A1:Z100'
+					range  : range
 				},function(err,response){
 						if (err)
 							console.log(err);
