@@ -7,7 +7,6 @@ var EmailMessages = function(){
 		EmailID().then(function(List){
 			var emailData=new Array();
 			var gmail = google.gmail('v1');
-//			console.log(List);
 			var count=1;
 			List.messagesList.forEach(function(value,index,size){
 				setTimeout(function(){
@@ -19,35 +18,28 @@ var EmailMessages = function(){
 					},function(err,response){
 						if(err){
 							console.log(err);
-							//reject(err);
 						}
 						else{
-							if(typeof response.payload.body.data !="undefined"){
-								emailData.push(new Buffer(response.payload.body.data,'base64').toString('utf-8'));
-//								console.log(new Buffer(response.payload.body.data,'base64').toString('utf-8'));
-							}
-							else if(typeof response.payload.parts[0].body.data !="undefined"){
-								emailData.push(new Buffer(response.payload.parts[0].body.data,'base64').toString('utf-8'));
-//									console.log(new Buffer(response.payload.parts[0].body.data,'base64').toString('utf-8'));
-								//console.log(response.payload.parts[0].body.data,'base64'.toString('utf-8'));
-							}
-							else if (typeof response.payload.parts[0].parts[0].body.data !="undefined"){
-								emailData.push(new Buffer(response.payload.parts[0].parts[0].body.data , 'base64').toString('utf-8'));
-							}
-							else		
-								console.log("email parse failed ! \n"+response);
-										//process.exit(1);
+							if(response.payload.mimeType.indexOf('text/html') != -1)
+								emailData.push({
+									message : new Buffer(response.payload.body.data,'base64').toString('utf-8'),
+									time : response.internalDate 
+								});
+							if(response.payload.mimeType.indexOf('multipart/alternative') != -1)
+								emailData.push({
+									message : new Buffer(response.payload.parts[0].body.data , 'base64').toString('utf-8'),
+									time: response.internalDate
+								});
+							
+								//code to handle mixed type and other type 
 						}
 						
 						if(count == List.messagesList.length){
-							//console.log("fulfill"+ emailData);
 							fulfill(emailData);
 						}
 						else{
-					//		console.log(count);
-					//		process.stdout.clearLine();
-							process.stdout.cursorTo(0);
-							process.stdout.write("Fetching... "+Math.floor(count*100/List.messagesList.length)+"%");
+//							process.stdout.cursorTo(0);
+							process.stdout.write(".");
 							
 						}
 						count++;						
