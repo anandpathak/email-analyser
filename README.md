@@ -7,10 +7,11 @@ email-analyser is an application which analyse email and produces analysed repor
 
 here is examples showing the details which can be extracted using this application 
 
- - 'did you expense increased with time ?'
+ - 'did your expense increased with time ?'
  - 'graph of how much money you  paid to a client'
  - 'whom you have emailed most number of the time ?'
- - ![graph-screen-shot](http://demoimageurl.com)
+ - here is the graph showing delivery time taken by different e-commerce company for a user
+ ![](https://raw.githubusercontent.com/anandpathak/email-analyser/master/images/product_delivery.png)
 
 #### Features 
   - It parse email and perfom task based on the result
@@ -32,11 +33,13 @@ here is examples showing the details which can be extracted using this applicati
 add you code to `src/parser/FileName.js` folder
 ```sh
     var messages= require('../GetEmailBody.js');
+    var sendData= require('../speadsheetSaver.js');
     messages().then(function(data){
         /*your parser code here */
 }).catch(function(error){
 	console.log("error : "+error);
 });
 ```
+run your code using `node FileName.js`
 
 **what are you waiting for, just try ! **
