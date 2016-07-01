@@ -4,3 +4,4 @@ node_modules*
 src/configuration.js
 output.log
 src/parser/basic.js
+src/WebView*
