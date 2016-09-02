@@ -1,0 +1,29 @@
+var CONFIG= {
+	Search : {
+		/*gmail search parameter 
+			e.g  'from : himesh@reshamiya.com'
+		*/
+		mail_search : 'from : himesh@reshamiya.com'
+		/*Maximum number of emails*/
+		,maxResults : 500
+		/* filter using label*/
+		,labelIds : 'unread'
+		,includeSpamTrash : false
+	},
+	Sheet :{
+		ID:'',
+		range:'A1',
+		sheetName : 'TestSpreadsheetAPI'
+	},
+	Rules :[
+		{
+			type : 'keyword' /*keyword, regex , send_from */
+			,action : ''		/*reply , delete , add_lebel , mark_as_read,count*/
+			,value : ['']		/*message*/
+		}
+
+	]
+
+
+}
+module.exports = CONFIG;
