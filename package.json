@@ -1,6 +1,6 @@
 {
   "name": "botmailer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,5 +22,6 @@
     "google-auth-library": "^0.9.8",
     "googleapis": "git+https://github.com/google/google-api-nodejs-client.git#0115f0f08a58c8b7cf963cf1cdfd05bcf31c27a4",
     "promise": "^7.1.1"
-  }
+  },
+  "repository" : {"type": "git", "url": "git://github.com/anandpathak/email-analyser"}
 }
