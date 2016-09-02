@@ -6,7 +6,7 @@ connect()
 		var sheets = google.sheets('v4');
 		sheets.spreadsheets.values.get({
     		auth: auth,
-    		spreadsheetId: '19FFlu45TBnEP_QotzUykPQvW6vl4W0LcNsKhJaZDqqA',
+    		spreadsheetId: '',
     		range: 'Class Data!A:B',
   		}, function(err, response) {
     		if (err) {

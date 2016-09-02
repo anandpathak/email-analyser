@@ -1,11 +1,15 @@
-var messages= require('../GetEmailBody.js');
-var sendData= require('../speadsheetSaver.js');
+var emails=require('botmailer');
 
-/*retreiving data */
-messages().then(function(data){
-	//write your code to parse data 
+/* Gmail Client API key*/
+var KEY={}
 
-	
-	/*saving data to spreadshhet*/
-	sendData(data,range);
+/* EMail Configuration  variable*/
+var CONFIG={}
+
+emails(KEY,CONFIG,function(err,data){
+	if(err)
+		throw data;
+	else
+		/*Here is the emails*/
+		console.log(data);
 });
