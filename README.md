@@ -22,24 +22,29 @@ here is examples showing the details which can be extracted using Email-analyser
 
  - requires [node.js](https://nodejs.org/en/download/)
  - gmail and spreadsheet [API](https://console.developers.google.com/flows/enableapi?apiid=gmail)
- - move api key file to new folder named `.credentials`. 
- - rename key file to `client_secret.json`
- - install dependencies
-    ```sh
-        npm install
+ -  
+ - install 
+    ```
+        npm install botmailer
     ```
 
 ##### writing your own parser
-add you code to `src/parser/FileName.js` folder
-```sh
-    var messages= require('../GetEmailBody.js');
-    var sendData= require('../speadsheetSaver.js');
-    messages().then(function(data){
-        /*your parser code here */
-}).catch(function(error){
-	console.log("error : "+error);
-});
+add you code to `FileName.js` folder
 ```
+    var emails=require('botmailer');
+	/* Gmail Client API key*/
+	var KEY={};
+	/* EMail Configuration  variable*/
+	var CONFIG={}
+	emails(KEY,CONFIG,function(err,data){
+		if(err)
+			throw data;
+		else
+			/*Here is the emails*/
+			console.log(data);
+	});
+```
+CONFIG variable Schema [here !] (src/configuration.js.example) :  
 run your code using `node FileName.js`
 
 **what are you waiting for, just try ! **
