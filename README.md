@@ -47,4 +47,3 @@ add you code to `FileName.js` folder
 CONFIG variable Schema [here !] (src/configuration.js.example) :  
 run your code using `node FileName.js`
 
-**what are you waiting for, just try ! **
